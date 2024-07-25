@@ -45,7 +45,7 @@ class SplashScreen(QMainWindow):
         self.expand_animation = QPropertyAnimation(self, b"geometry")
         self.expand_animation.setDuration(2000)
         self.expand_animation.setStartValue(QRect(400, 200, 10, 10))
-        self.expand_animation.setEndValue(QRect(400, 200, 800, 600))  # Updated size
+        self.expand_animation.setEndValue(QRect(400, 200, 800, 600))  
         self.expand_animation.setEasingCurve(QEasingCurve.OutQuad)
         self.expand_animation.finished.connect(self.show_text)
         self.expand_animation.start()
@@ -54,14 +54,12 @@ class SplashScreen(QMainWindow):
         self.welcome_label = QLabel("Welcome to Germanized's Loader", self)
         self.welcome_label.setAlignment(Qt.AlignCenter)
 
-        # Load custom font
         font_id = QFontDatabase.addApplicationFont("Mont.otf")
         font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
         self.welcome_label.setFont(QFont(font_family))
         self.welcome_label.setStyleSheet("color: white; font-size: 24px;")
         self.central_widget.layout().addWidget(self.welcome_label)
 
-        # Opacity effect
         self.opacity_effect = QGraphicsOpacityEffect(self.welcome_label)
         self.welcome_label.setGraphicsEffect(self.opacity_effect)
 
@@ -84,7 +82,7 @@ class SplashScreen(QMainWindow):
 
     def cleanup_and_shrink(self):
         self.welcome_label.deleteLater()
-        self.expand_animation.setStartValue(QRect(400, 200, 800, 600))  # Updated size
+        self.expand_animation.setStartValue(QRect(400, 200, 800, 600))  
         self.expand_animation.setEndValue(QRect(400, 200, 10, 10))
         self.expand_animation.setEasingCurve(QEasingCurve.InQuad)
         self.expand_animation.finished.connect(self.open_main_window)
@@ -131,7 +129,7 @@ class LoaderApp(DraggableWidget):
         super().__init__()
         self.initUI()
         self.play_music()
-        self.expand_window()  # Start the expand animation
+        self.expand_window() 
 
     def initUI(self):
         self.setGeometry(300, 150, 1000, 700)
@@ -142,7 +140,6 @@ class LoaderApp(DraggableWidget):
         central_widget.setLayout(central_layout)
         self.setCentralWidget(central_widget)
 
-        # Load custom font
         font_id = QFontDatabase.addApplicationFont("Mont.otf")
         font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
         self.setFont(QFont(font_family))
@@ -223,7 +220,7 @@ class LoaderApp(DraggableWidget):
         url = "https://github.com/Germanized?tab=repositories"
         try:
             response = requests.get(url)
-            response.raise_for_status()  # Check for HTTP errors
+            response.raise_for_status()  
             soup = BeautifulSoup(response.text, 'html.parser')
             repo_items = soup.find_all('div', class_='d-inline-block mb-1')
 
@@ -246,7 +243,7 @@ class LoaderApp(DraggableWidget):
         readme_url = "https://github.com/Germanized/Germanized/blob/main/README.md"
         try:
             response = requests.get(readme_url)
-            response.raise_for_status()  # Check for HTTP errors
+            response.raise_for_status()  
 
             soup = BeautifulSoup(response.text, 'html.parser')
             content = soup.find('article', {'class': 'markdown-body entry-content container-lg'}).get_text()
@@ -259,7 +256,7 @@ class LoaderApp(DraggableWidget):
         pygame.mixer.init()
         pygame.mixer.music.load("background_music.mp3")
         pygame.mixer.music.set_volume(0.5)
-        pygame.mixer.music.play(-1)  # Loop the music
+        pygame.mixer.music.play(-1)  
 
     def toggle_mute(self):
         if self.muted:
@@ -275,7 +272,7 @@ class LoaderApp(DraggableWidget):
         self.expand_animation = QPropertyAnimation(self, b"geometry")
         self.expand_animation.setDuration(2000)
         self.expand_animation.setStartValue(QRect(300, 150, 10, 10))
-        self.expand_animation.setEndValue(QRect(300, 150, 1000, 700))  # Updated size
+        self.expand_animation.setEndValue(QRect(300, 150, 1000, 700))  
         self.expand_animation.setEasingCurve(QEasingCurve.OutQuad)
         self.expand_animation.start()
 
